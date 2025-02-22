@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
-import { db } from "../../../lib/firebase";
+import { db } from "../../../../lib/firebase";
 
 // GET: Retrieve a single topic
 export async function GET(request, { params }) {
