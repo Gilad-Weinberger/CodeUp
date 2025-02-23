@@ -10,16 +10,18 @@ import Image from "next/image";
 import Navbar from "../../components/Navbar";
 import Topic from "../../components/CreateCourse/Topic";
 import Level from "../../components/CreateCourse/Level";
+import Title from "../../components/CreateCourse/Title";
 
 const Page = () => {
   const [user, setUser] = useState();
   const router = useRouter();
 
-  const stepsCount = 10;
+  const stepsCount = 5;
   const [currentStep, setCurrentStep] = useState(1);
   const [courseData, setCourseData] = useState({
     topic: null,
     level: null,
+    title: null,
   });
   const progress = ((currentStep - 1) / stepsCount) * 100;
 
@@ -72,7 +74,13 @@ const Page = () => {
                 onBack={handleBack}
               />
             )}
-            {/* Add more steps as needed */}
+            {currentStep === 3 && (
+              <Title
+                onContinue={(title) => handleContinue(title)}
+                onBack={handleBack}
+                courseData={courseData}
+              />
+            )}
           </div>
           <div className="mt-4 flex w-full justify-between">
             <button

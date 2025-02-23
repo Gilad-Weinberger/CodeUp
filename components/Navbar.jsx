@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { NavbarLinks } from "../lib/data";
 import Link from "next/link";
-import logout from "../lib/logout";
+import logout from "../lib/functions/logout";
 
 const Navbar = ({ user = undefined, fixed = false }) => {
   const notifications = 0;

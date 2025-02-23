@@ -4,19 +4,22 @@ import { useState } from "react";
 
 const Level = ({ onContinue, onBack }) => {
   const [selectedLevel, setSelectedLevel] = useState(null);
+  const levelOptions = ["Beginner", "Intermediate", "Advanced"];
 
   const handleLevelClick = (level) => {
-    setSelectedLevel(level);
+    setSelectedLevel(selectedLevel === level ? null : level);
   };
 
   return (
-    <div className="flex max-w-[60%] flex-col">
-      <ul className="list-disc pl-5">
-        {["Beginner", "Intermediate", "Advanced"].map((level, index) => (
+    <div className="mx-auto max-w-2xl rounded-lg bg-gray-900 p-8 text-white shadow-lg">
+      <ul className="space-y-2">
+        {levelOptions.map((level, index) => (
           <li
             key={index}
-            className={`mb-2 cursor-pointer ${
-              selectedLevel === level ? "bg-blue-500 text-white" : ""
+            className={`cursor-pointer rounded p-3 transition duration-200 ease-in-out ${
+              selectedLevel === level
+                ? "bg-blue-500 text-white"
+                : "hover:bg-gray-700"
             }`}
             onClick={() => handleLevelClick(level)}
           >
@@ -24,13 +27,16 @@ const Level = ({ onContinue, onBack }) => {
           </li>
         ))}
       </ul>
-      <div className="mt-4 flex w-full justify-between gap-4">
-        <button className="rounded bg-gray-500 p-2 text-white" onClick={onBack}>
+      <div className="mt-6 flex justify-between gap-6">
+        <button
+          className="w-1/3 rounded bg-gray-500 p-3 text-white transition hover:bg-gray-600"
+          onClick={onBack}
+        >
           Back
         </button>
         <button
-          className="rounded bg-blue-500 p-2 text-white"
-          style={{ visibility: selectedLevel ? "visible" : "hidden" }}
+          className="w-2/3 rounded bg-blue-500 p-3 text-white transition hover:bg-blue-600 disabled:opacity-50"
+          disabled={!selectedLevel}
           onClick={() => {
             onContinue({ level: selectedLevel });
           }}
